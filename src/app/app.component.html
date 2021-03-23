@@ -1,7 +1,46 @@
-<div *ngIf="error">
-  {{ error }}
-</div>
+<section class="restaurant-display">
+  <div *ngIf="error">
+    {{ error }}
+  </div>
 
-<ul>
-  <li *ngFor="let restaurant of restaurants"> {{ restaurant.name }}</li>
-</ul>
+  <ul>
+    <li *ngFor="let restaurant of restaurants"> {{ restaurant.name }}</li>
+  </ul>
+</section>
+
+<section class="restaurant-form">
+  <form [formGroup]="restaurantForm"
+        (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">
+        Name
+      </label>
+      <input id="name"
+             type="text"
+             formControlName="name" />
+    </div>
+
+    <div>
+      <label for="address">
+        Description
+      </label>
+      <input id="description"
+             type="text"
+             formControlName="description" />
+    </div>
+
+    <div *ngIf="allCategories">
+      <br />
+      Select categories
+      <div *ngFor="let category of allCategories">
+        <label>{{ category.name }}</label>
+        <input [value]="category.id"
+               type="checkbox"
+               (change)="onCheckChange($event)" />
+      </div>
+    </div>
+
+    <button class="button"
+            type="submit">Create</button>
+  </form>
+</section>
